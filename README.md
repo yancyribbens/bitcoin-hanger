@@ -1,5 +1,5 @@
 # bitcoin-mount
-Steps for running a bitcoin-full node and wallet address creation.  The following steps will create a container with all the bitcoin dependencies, and then mount the latest bitcoin inside the container allowing the blockchain to be persisted.  Lastly, steps for creating a wallet address are provided.
+The following steps will create a docker container with all the bitcoin dependencies installed, and then mount the latest bitcoin-core inside the container with two mounted volumes.  The first volume mounts the bitcoin source code for installing and testing changes; the second volume mounts .bitcoin to the home directory for persisting the blockchain and wallet.  Lastly, steps for creating a wallet address are described.
 
 ## Setup
 
@@ -26,6 +26,7 @@ Steps for running a bitcoin-full node and wallet address creation.  The followin
 
 4. Run bitcoin
 ```console
+    $ sudo docker run -v $(pwd):/usr/local/bitcoin -v ~/.bitcoin:/root/.bitcoin -it --name bitcoin-dev-container bitcoin-dev
     $ sudo docker run -v $(pwd):/usr/local/bitcoin -it --name bitcoin-dev-container bitcoin-dev
 ```
 
