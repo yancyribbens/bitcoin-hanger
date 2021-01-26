@@ -19,10 +19,9 @@ RUN apt-get update -qq && apt-get install -y \
 RUN curl -OL http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz
 RUN tar -xvf db-4.8.30.NC.tar.gz
 RUN cd ./db-4.8.30.NC/build_unix && \
-    mkdir -p build && BDB_PREFIX=$(pwd)/build && \
-    ../dist/configure --disable-shared --enable-cxx --with-pic --prefix=$BDB_PREFIX && \
+    mkdir -p build && \
+    ../dist/configure --disable-shared --enable-cxx --with-pic --prefix=/db-4.8.30.NC/build_unix/build && \
     make install
-RUN echo "BDB_PREFIX=\"/db-4.8.30.NC/build_unix/build\"; export BDB_PREFIX" >> ~/.bashrc
 
 RUN mkdir /usr/local/bitcoin
 WORKDIR /usr/local/bitcoin
