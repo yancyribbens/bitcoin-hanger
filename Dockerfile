@@ -3,7 +3,6 @@ maintainer yancy ribbens "email@yancy.lol"
 
 RUN apt-get update -qq && apt-get install -y \
     git \
-    wget \
     build-essential \
     libtool \
     autotools-dev \
@@ -13,10 +12,11 @@ RUN apt-get update -qq && apt-get install -y \
     libevent-dev \
     bsdmainutils \
     python3 \
-    libboost-all-dev
+    libboost-all-dev \
+    curl
 
 # Install Berkley Database
-RUN wget http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz
+RUN curl -OL http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz
 RUN tar -xvf db-4.8.30.NC.tar.gz
 RUN cd ./db-4.8.30.NC/build_unix && \
     mkdir -p build && BDB_PREFIX=$(pwd)/build && \
